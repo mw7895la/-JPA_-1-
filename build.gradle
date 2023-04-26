@@ -1,0 +1,42 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.11'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'jpabook'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'			//맨 위 plugins에서 스프링 부트의 버전이 2.7.11이다. 기본적으로 스프링 부트는 2.7.11에서 궁합이 맞는 라이브러리 버전이 뭔지 다 세팅해놨다.
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//devtools를 넣으면 개발할때 도와주는 기능이 많다.  캐시나 이런것도 없애고 html 몇개 고치면 되는데 서버를 또 띄워야되는 불편함도 줄인다.
+	//implementation 'org.springframework.boot:spring-boot-starter-devtools'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//Junit 4
+	testImplementation("org.junit.vintage:junit-vintage-engine") {
+		exclude group: "org.hamcrest", module: "hamcrest-core"
+	}
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'		//스프링 부트가 미리 세팅을 하지않는, 지원하지 않는 라이브러리는 버전 정보를 적어줘야 한다.
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
