@@ -1,12 +1,9 @@
 package jpabook.jpabook;
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-@Repository
-public class MemberRepository {
+//@Repository
+public class MemberRepository_test {
 
     /** JPA를 쓰기 때문에 이제 내가 알던 기존과 다름.*/
 
@@ -16,7 +13,7 @@ public class MemberRepository {
 
     //스프링 컨테이너에서 관리되는 빈이 아닌, application-managed EntityManager bean을 Thread 하나 당 주입하기 위해 사용하는 어노테이션이다 (스프링이 빌려쓰는 것.)
     //JPA를 쓰기 때문에 EntityManager가 있어야 한다. 스프링 부트가 저 어노테이션이 있으면  엔티티매니저를 주입해준다. 엔티티 매니저 팩토리 생성하는것은 스프링 부트가 다  해준다.
-    @PersistenceContext //영속성 컨텍스트
+    //@PersistenceContext //영속성 컨텍스트
     private EntityManager em;
 
     public Long save(Member1 member) {
