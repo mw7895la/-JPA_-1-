@@ -2,8 +2,10 @@ package jpabook.jpabook.domain.item;
 
 import jpabook.jpabook.domain.*;
 import jpabook.jpabook.domain.exception.NotEnoughStockException;
+import jpabook.jpabook.domain.service.UpdateItemDto;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
@@ -16,6 +18,7 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
+@Slf4j
 public abstract class Item {
     //상속 관계 매핑을 해야된다.
     @Id
@@ -49,5 +52,12 @@ public abstract class Item {
             throw new NotEnoughStockException("need more stock");
         }
         this.stockQuantity = restStock;
+    }
+
+    public void changeItem(UpdateItemDto updateItemDto) {
+        log.info("Item 부모 엔티티 업데이트 로직");
+        this.name = updateItemDto.getName();
+        this.price = updateItemDto.getPrice();
+        this.stockQuantity = updateItemDto.getStockQuantity();
     }
 }

@@ -27,7 +27,7 @@ public class MemberController {
     @PostMapping("/members/new")
     public String create(@Valid MemberForm form, BindingResult bindingResult) {
         //BindingResult를 안해주면 whitelabel 에러 뜨면서 팅겨버린다.
-        //@Valid 한것 다음에 BindingResult가 있으면 오류가 bindingResult에 오류가 담겨서 아래 코드들이 실행이 된다.
+        //@Valid 한것 다음에 BindingResult가 있으면 bindingResult에 오류가 담겨서 아래 코드들이 실행이 된다.
         //그리고 다시 members/createMemberForm으로 가서 무슨 에러가 있었는지 뿌려준다. memberForm이름으로 모델을 넘겨준다.
         if (bindingResult.hasErrors()) {
             return "members/createMemberForm";
